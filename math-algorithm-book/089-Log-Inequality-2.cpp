@@ -19,5 +19,5 @@ int main() {
 
     val *= c;
   }
-  return 0;
+
 }
