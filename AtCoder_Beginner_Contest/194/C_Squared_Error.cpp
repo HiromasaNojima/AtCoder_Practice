@@ -1,27 +1,26 @@
 #include <bits/stdc++.h> 
 using namespace std;
-
-int maxA = 200;
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
 
 int main() {
     int n;
     cin >> n;
-    vector<int> vec(n);
-    for (int i = 0; i < n; i++) {
-        cin >> vec[i];
+    vector<long long> vec(401, 0);
+    rep(i, n) {
+      int a;
+      cin >> a;
+      ++vec[a + 200];
     }
 
-    long long answer = 0;
-    vector<int> distribution(maxA * 2 + 1);
-    for (int i = 0; i < n; i++) {
-        for (int j = -200; j <= maxA; j++) {
-            int count = distribution[maxA+j];
-            int rest = (vec[i] - j);
-            answer += (long long)rest * rest * count;
+    long long ans = 0;
+    for(long long i = 1; i <= 400; i++) {
+      for(long long j = 0; j <= i - 1; j++) {
+        if (vec[i] != 0 && vec[j] != 0) {
+          ans += (i - j) * (i - j) * (vec[j] * vec[i]);
         }
-        distribution[maxA + vec[i]]++;
+      }
     }
 
-    cout << answer << endl;
+    cout << ans << endl;
     return 0;
 }
